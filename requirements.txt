@@ -1,0 +1,23 @@
+pandas
+numpy
+notebook
+transformers
+torch
+sentencepiece
+tokenizers
+PyMuPDF
+pdfplumber
+python-docx
+spacy
+nltk
+python-box==6.0.2
+PyYAML
+ensure==1.0.4
+joblib
+types-PyYAML
+fastapi
+uvicorn
+python-multipart
+Jinja2
+tqdm
+-e .
