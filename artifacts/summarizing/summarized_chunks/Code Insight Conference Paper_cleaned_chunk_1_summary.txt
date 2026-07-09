@@ -1,0 +1,1 @@
+This paper presents an educational code assessment platform using fine-Tuned and generative AI models .<n>The system combines an algorithmic CodeLlama 7B model for analyzing time and space complexity with a generative AI model (Gemini API) that provides detailed explanations, optimization suggestions, and learning support .

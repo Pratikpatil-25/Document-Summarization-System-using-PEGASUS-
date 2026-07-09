@@ -1,0 +1,1 @@
+This paper proposes a hybrid AI-based educational code assessment platform that combines fine-tuned and generative models .<n>The proposed system integrates automated code execution with AI-driven analysis to assess not only the correctness of a program but also its efficiency, structure, and conceptual quality .

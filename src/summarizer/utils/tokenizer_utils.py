@@ -16,7 +16,7 @@ def load_tokenizer(model_name: str) -> PreTrainedTokenizerBase:
         PreTrainedTokenizerBase: Loaded tokenizer.
     """
 
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_name, local_files_only = True)
 
     return tokenizer
 

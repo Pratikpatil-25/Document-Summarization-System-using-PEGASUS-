@@ -5,22 +5,25 @@ from src.summarizer.entity.config_entity import ChunkingConfig
 from src.summarizer.logging import logger
 
 from src.summarizer.utils.common import create_directories
-from src.summarizer.utils.tokenizer_utils import load_tokenizer, split_into_token_chunks
+from src.summarizer.utils.tokenizer_utils import split_into_token_chunks
+
+# from src.summarizer.utils.tokenizer_utils import load_tokenizer, split_into_token_chunks
 
 
 class Chunking:
     
-    def __init__(self, config: ChunkingConfig):
+    def __init__(self, config: ChunkingConfig, tokenizer):
         self.config = config
+        self.tokenizer = tokenizer
         
         create_directories([
             self.config.root_dir, 
             self.config.chunked_dir
             ])
 
-        self.tokenizer = load_tokenizer(
-            self.config.tokenizer_name
-        )
+        # self.tokenizer = load_tokenizer(
+        #     self.config.tokenizer_name
+        # )
 
     def chunk_document(self, file_path: Path ) -> List[Path]:
        
@@ -40,7 +43,7 @@ class Chunking:
 
         for index, chunk in enumerate(chunks, start=1):
             chunk_path = ( self.config.chunked_dir / f"{file_path.stem}_chunk_{index}.txt" )
-            
+
             with open( chunk_path, "w", encoding="utf-8" ) as chunk_file:
                 chunk_file.write(chunk)
 

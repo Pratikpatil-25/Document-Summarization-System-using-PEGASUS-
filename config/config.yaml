@@ -27,3 +27,9 @@ chunking:
   root_dir: artifacts/chunking
   preprocessed_dir: artifacts/document_preprocessing/preprocessed_files
   chunked_dir: artifacts/chunking/chunked_files
+
+summarizing:
+  root_dir: artifacts/summarizing
+  chunked_dir: artifacts/chunking/chunked_files
+  summarized_chunks: artifacts/summarizing/summarized_chunks
+  summarized_files: artifacts/summarizing/summarized_files

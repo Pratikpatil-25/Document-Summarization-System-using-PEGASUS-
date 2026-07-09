@@ -4,7 +4,8 @@ from src.summarizer.entity.config_entity import (DocIngestionConfig,
                                                  DocValidationConfig, 
                                                  DocPreprocessingConfig, 
                                                  TextExtractionConfig,
-                                                 ChunkingConfig)
+                                                 ChunkingConfig,
+                                                 SummarizingConfig)
 from pathlib import Path
 
 class ConfigurationManager:
@@ -92,3 +93,24 @@ class ConfigurationManager:
         )
 
         return chunking_config
+    
+    def get_summarizing_config(self) -> SummarizingConfig:
+        config = self.config.summarizing
+        params = self.params.summarizing
+
+        create_directories([config.root_dir, config.summarized_chunks, config.summarized_files])
+
+        summarizing_config = SummarizingConfig(
+            root_dir = Path(config.root_dir),
+            chunked_dir = Path(config.chunked_dir),
+            summarized_chunks = Path(config.summarized_chunks),
+            summarized_files = Path(config.summarized_files),
+            model_name = params.model_name,
+            max_length = params.max_length,
+            min_length = params.min_length,
+            do_sample = params.do_sample,
+            temperature = params.temperature
+        )
+
+        return summarizing_config
+        

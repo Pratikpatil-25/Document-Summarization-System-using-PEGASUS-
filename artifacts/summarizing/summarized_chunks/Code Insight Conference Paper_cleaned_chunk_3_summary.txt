@@ -1,0 +1,1 @@
+System architecture is designed to ensure efficient processing of user submissions .<n>It integrates hybrid AI capabilities for comprehensive code evaluation and feedback .<n>The architecture follows a modular and layered design, allowing scalability, maintainability, and seamless interaction between different components .

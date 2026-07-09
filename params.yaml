@@ -1,4 +1,5 @@
-pegasus :
+summarizing :
+  model_name : "google/pegasus-cnn_dailymail"
   max_length : 150
   min_length : 50
   do_sample : False

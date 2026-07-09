@@ -4,6 +4,8 @@ from src.summarizer.pipeline.prediction import PredictionPipeline
 from src.summarizer.config.configuration import ConfigurationManager
 import traceback
 
+
+
 app = FastAPI(
     title="Document Summarization API",
     version="1.0",
@@ -11,11 +13,14 @@ app = FastAPI(
 )
 
 
+
 @app.get("/")
 def home():
     return {
         "message": "Document Summarization API is running."
     }
+
+
 
 
 config = ConfigurationManager()
@@ -36,12 +41,10 @@ def summarize_document(
 
     try:
 
-        summary = "This is a placeholder summary. The summarization logic is not yet implemented."
-        list_chunk_path = prediction_pipeline.predict(file)
+        summary = prediction_pipeline.predict(file)
 
         return {
         "filename": file.filename,
-        "cleaned_text": list_chunk_path,
         "summary": summary
     }
 

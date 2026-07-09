@@ -1,0 +1,9 @@
+This paper presents an educational code assessment platform using fine-Tuned and generative AI models .<n>The system combines an algorithmic CodeLlama 7B model for analyzing time and space complexity with a generative AI model (Gemini API) that provides detailed explanations, optimization suggestions, and learning support .
+
+This paper proposes a hybrid AI-based educational code assessment platform that combines fine-tuned and generative models .<n>The proposed system integrates automated code execution with AI-driven analysis to assess not only the correctness of a program but also its efficiency, structure, and conceptual quality .
+
+System architecture is designed to ensure efficient processing of user submissions .<n>It integrates hybrid AI capabilities for comprehensive code evaluation and feedback .<n>The architecture follows a modular and layered design, allowing scalability, maintainability, and seamless interaction between different components .
+
+This paper presents an educational code assessment platform that integrates a hybrid artificial intelligence approach to improve both code evaluation and learning outcomes .<n>The results indicate that the proposed system successfully enhances traditional code assessment methods by incorporating intelligent analysis and educational feedback .<n>Future work can focus on extending support to multiple programming languages .
+
+The proposed platform lays a strong foundation for intelligent and interactive programming education systems .<n>The system can be enhanced by incorporating personalized learning paths based on user performance and behavior .<n>Further research can also explore the use of more advanced hybrid AI architectures .

@@ -37,3 +37,15 @@ class ChunkingConfig:
   chunk_size : int
   overlap : int 
 
+@dataclass(frozen = True)
+class SummarizingConfig:
+  root_dir: Path
+  chunked_dir: Path
+  summarized_chunks: Path
+  summarized_files: Path
+  model_name : str
+  max_length : int
+  min_length : int
+  do_sample : bool
+  temperature : float
+
