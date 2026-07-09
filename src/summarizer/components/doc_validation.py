@@ -162,7 +162,7 @@ class DocValidation:
 
     ###########################################################################
 
-    def validate_all(self, file_path: Path) -> bool:
+    def validate_all(self, file_path: Path) -> Path | bool:
         try:
             self.validate_file_exists(file_path)
             self.validate_file_extension(file_path)
@@ -176,7 +176,7 @@ class DocValidation:
             shutil.copy2(file_path, destination)
 
             logger.info(f"Validation successful: {destination}")
-            return True
+            return destination
 
         except Exception as e:
 

@@ -1,9 +1,7 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from pathlib import Path
-
+from src.summarizer.pipeline.prediction import PredictionPipeline
 from src.summarizer.config.configuration import ConfigurationManager
-from src.summarizer.components.doc_ingestion import DocIngestion
-from src.summarizer.components.doc_validation import DocValidation
 
 app = FastAPI(
     title="Document Summarization API",
@@ -11,14 +9,6 @@ app = FastAPI(
     description="Upload PDF, DOCX or TXT files and generate summaries."
 )
 
-# Load configuration
-config = ConfigurationManager()
-
-document_ingestion_config = ( config.get_doc_ingestion_config() )
-document_ingestion = DocIngestion(config = document_ingestion_config )
-
-document_validation_config = ( config.get_doc_validation_config() ) 
-document_validation = DocValidation(config = document_validation_config )  
 
 @app.get("/")
 def home():
@@ -27,8 +17,10 @@ def home():
     }
 
 
-@app.post("/upload")
-def upload_document(
+config = ConfigurationManager()
+
+@app.post("/summarize")
+def summarize_document(
     file: UploadFile = File(...)
 ):
     """
@@ -42,23 +34,14 @@ def upload_document(
 
     try:
 
-        saved_path = document_ingestion.save_document(file)
-
-        # Validate the uploaded document
-        is_valid = document_validation.validate_all(saved_path)
-
-        if not is_valid:
-            raise HTTPException(
-                status_code=400,
-                detail="Uploaded document is invalid."
-            )
-
+        summary = "This is a placeholder summary. The summarization logic is not yet implemented."
+        cleaned_text = PredictionPipeline(config).predict(file)
 
         return {
-            "message": "Document uploaded and Validated successfully.",
-            "filename": file.filename,
-            "saved_path": str(saved_path)
-        }
+        "filename": file.filename,
+        "cleaned_text": cleaned_text,
+        "summary": summary
+    }
 
     except ValueError as e:
 

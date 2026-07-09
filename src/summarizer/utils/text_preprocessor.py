@@ -39,7 +39,12 @@ def normalize_unicode(text: str) -> str:
         "’": "'",
         "–": "-",
         "—": "-",
-        "…": "..."
+        "…": "...",
+        "ﬄ": "ffl",
+        "ﬃ": "ffi",
+        "ﬀ": "ff",
+        "ﬂ": "fl",
+        "ﬁ": "fi"
     }
 
     for old, new in replacements.items():

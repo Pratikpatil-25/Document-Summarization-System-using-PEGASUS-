@@ -12,3 +12,14 @@ document_validation:
   supported_extensions: [".pdf", ".docx", ".txt"]
   max_file_size_mb: 25
   min_words: 250
+
+text_extraction:
+  root_dir: artifacts/text_extraction
+  valid_dir: artifacts/document_validation/valid_files
+  extracted_dir: artifacts/text_extraction/extracted_texts
+
+document_preprocessing:
+  root_dir: artifacts/document_preprocessing
+  extracted_dir: artifacts/text_extraction/extracted_texts
+  preprocessed_dir: artifacts/document_preprocessing/preprocessed_files
+

@@ -1,3 +1,0 @@
-Artificial Intelligence is transforming industries.
-Machine Learning is a subset of AI.
-Deep Learning is based on Neural Networks.

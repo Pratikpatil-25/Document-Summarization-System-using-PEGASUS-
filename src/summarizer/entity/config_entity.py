@@ -16,3 +16,15 @@ class DocValidationConfig:
   max_file_size_mb: int
   min_words: int
 
+@dataclass(frozen = True)
+class TextExtractionConfig:
+  root_dir: Path
+  valid_dir: Path
+  extracted_dir: Path
+
+@dataclass(frozen = True)
+class DocPreprocessingConfig:
+  root_dir: Path
+  extracted_dir: Path
+  preprocessed_dir: Path
+

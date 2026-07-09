@@ -1,6 +1,6 @@
 from src.summarizer.constants import *
 from src.summarizer.utils.common import read_yaml, create_directories
-from src.summarizer.entity.config_entity import DocIngestionConfig, DocValidationConfig
+from src.summarizer.entity.config_entity import DocIngestionConfig, DocValidationConfig, DocPreprocessingConfig, TextExtractionConfig
 from pathlib import Path
 
 class ConfigurationManager:
@@ -45,3 +45,29 @@ class ConfigurationManager:
         )
 
         return doc_validation_config
+    
+    def get_text_extraction_config(self) -> TextExtractionConfig:
+        config = self.config.text_extraction
+
+        create_directories([config.root_dir, config.extracted_dir])
+
+        text_extraction_config = TextExtractionConfig(
+            root_dir=Path(config.root_dir),
+            valid_dir=Path(config.valid_dir),
+            extracted_dir=Path(config.extracted_dir)
+        )
+
+        return text_extraction_config
+
+    def get_doc_preprocessing_config(self) -> DocPreprocessingConfig:
+        config = self.config.document_preprocessing
+
+        create_directories([config.root_dir, config.preprocessed_dir])
+
+        doc_preprocessing_config = DocPreprocessingConfig(
+            root_dir=Path(config.root_dir),
+            extracted_dir=Path(config.extracted_dir),
+            preprocessed_dir=Path(config.preprocessed_dir)
+        )
+
+        return doc_preprocessing_config
