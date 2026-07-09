@@ -1,6 +1,10 @@
 from src.summarizer.constants import *
 from src.summarizer.utils.common import read_yaml, create_directories
-from src.summarizer.entity.config_entity import DocIngestionConfig, DocValidationConfig, DocPreprocessingConfig, TextExtractionConfig
+from src.summarizer.entity.config_entity import (DocIngestionConfig, 
+                                                 DocValidationConfig, 
+                                                 DocPreprocessingConfig, 
+                                                 TextExtractionConfig,
+                                                 ChunkingConfig)
 from pathlib import Path
 
 class ConfigurationManager:
@@ -71,3 +75,20 @@ class ConfigurationManager:
         )
 
         return doc_preprocessing_config
+    
+    def get_chunking_config(self) -> ChunkingConfig:
+        config = self.config.chunking
+        params = self.params.chunking
+
+        create_directories([config.root_dir, config.chunked_dir])
+
+        chunking_config = ChunkingConfig(
+            root_dir=Path(config.root_dir),
+            preprocessed_dir=Path(config.preprocessed_dir),
+            chunked_dir=Path(config.chunked_dir),
+            tokenizer_name = params.tokenizer_name,
+            chunk_size=params.chunk_size,
+            overlap = params.overlap
+        )
+
+        return chunking_config

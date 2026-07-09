@@ -1,4 +1,10 @@
-max_length : 150
-min_length : 50
-do_sample : False
-temperature : 0.4
+pegasus :
+  max_length : 150
+  min_length : 50
+  do_sample : False
+  temperature : 0.4
+
+chunking :
+  tokenizer_name : "google/pegasus-cnn_dailymail"
+  chunk_size : 900
+  overlap : 100  

@@ -20,4 +20,5 @@ uvicorn
 python-multipart
 Jinja2
 tqdm
+protobuf
 -e .

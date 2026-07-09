@@ -1,9 +1,10 @@
 from typing import List
 from ensure import ensure_annotations
 from transformers import AutoTokenizer, PreTrainedTokenizerBase
+from nltk.tokenize import sent_tokenize
 
 
-@ensure_annotations
+
 def load_tokenizer(model_name: str) -> PreTrainedTokenizerBase:
     """
     Load a Hugging Face tokenizer.
@@ -87,72 +88,81 @@ def truncate_text(text: str,tokenizer: PreTrainedTokenizerBase, max_tokens: int)
     return truncated_text
 
 
-@ensure_annotations
-def split_into_token_chunks(text: str,tokenizer: PreTrainedTokenizerBase, chunk_size: int = 450,overlap: int = 50) -> List[str]:
+
+
+
+def split_into_token_chunks(
+    text: str,
+    tokenizer: PreTrainedTokenizerBase,
+    chunk_size: int,
+    overlap: int = 0
+):
     """
-    Split text into overlapping token chunks.
+    Split text into chunks without breaking sentences.
 
-    Example
-
-        chunk1: tokens 1-450
-
-        chunk2: tokens 401-850
-
-        chunk3: tokens 801-1250
-
-    Args:
-        text (str): Input text.
-        tokenizer: Hugging Face tokenizer.
-        chunk_size (int): Tokens per chunk.
-        overlap (int): Overlap between chunks.
-
-    Returns:
-        List[str]: List of text chunks.
+    Each chunk contains as many complete sentences as possible
+    while staying below chunk_size tokens.
     """
 
-    if overlap >= chunk_size:
-        raise ValueError(
-            "overlap must be smaller than chunk_size."
-        )
-
-    token_ids = tokenizer.encode(
-        text,
-        add_special_tokens=False
-    )
+    sentences = sent_tokenize(text)
 
     chunks = []
 
-    step = chunk_size - overlap
+    current_chunk = []
 
-    for start in range(0, len(token_ids), step):
+    current_tokens = 0
 
-        end = start + chunk_size
+    for sentence in sentences:
 
-        chunk_ids = token_ids[start:end]
-
-        chunk_text = tokenizer.decode(
-            chunk_ids,
-            skip_special_tokens=True
+        sentence_tokens = len(
+            tokenizer.encode(
+                sentence,
+                add_special_tokens=False
+            )
         )
 
-        chunks.append(chunk_text)
+        # Sentence itself larger than chunk
+        if sentence_tokens > chunk_size:
 
-        if end >= len(token_ids):
-            break
+            if current_chunk:
+                chunks.append(" ".join(current_chunk))
+                current_chunk = []
+                current_tokens = 0
+
+            token_ids = tokenizer.encode(
+                sentence,
+                add_special_tokens=False
+            )
+
+            step = chunk_size - overlap
+
+            for i in range(0, len(token_ids), step):
+
+                part = tokenizer.decode(
+                    token_ids[i:i + chunk_size],
+                    skip_special_tokens=True
+                )
+
+                chunks.append(part)
+
+            continue
+
+        if current_tokens + sentence_tokens <= chunk_size:
+
+            current_chunk.append(sentence)
+
+            current_tokens += sentence_tokens
+
+        else:
+
+            chunks.append(" ".join(current_chunk))
+
+            current_chunk = [sentence]
+
+            current_tokens = sentence_tokens
+
+    if current_chunk:
+
+        chunks.append(" ".join(current_chunk))
 
     return chunks
-
-
-@ensure_annotations
-def merge_chunks(chunks: List[str]) -> str:
-    """
-    Merge multiple text chunks into one string.
-
-    Args:
-        chunks (List[str]): List of chunks.
-
-    Returns:
-        str: Combined text.
-    """
-
-    return "\n\n".join(chunks)

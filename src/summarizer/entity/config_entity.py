@@ -28,3 +28,12 @@ class DocPreprocessingConfig:
   extracted_dir: Path
   preprocessed_dir: Path
 
+@dataclass(frozen = True)
+class ChunkingConfig:
+  root_dir: Path
+  preprocessed_dir: Path
+  chunked_dir: Path
+  tokenizer_name : str
+  chunk_size : int
+  overlap : int 
+

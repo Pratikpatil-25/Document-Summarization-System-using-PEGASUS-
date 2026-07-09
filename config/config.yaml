@@ -23,3 +23,7 @@ document_preprocessing:
   extracted_dir: artifacts/text_extraction/extracted_texts
   preprocessed_dir: artifacts/document_preprocessing/preprocessed_files
 
+chunking:
+  root_dir: artifacts/chunking
+  preprocessed_dir: artifacts/document_preprocessing/preprocessed_files
+  chunked_dir: artifacts/chunking/chunked_files

@@ -2,6 +2,7 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 from pathlib import Path
 from src.summarizer.pipeline.prediction import PredictionPipeline
 from src.summarizer.config.configuration import ConfigurationManager
+import traceback
 
 app = FastAPI(
     title="Document Summarization API",
@@ -18,6 +19,7 @@ def home():
 
 
 config = ConfigurationManager()
+prediction_pipeline = PredictionPipeline(config)
 
 @app.post("/summarize")
 def summarize_document(
@@ -35,11 +37,11 @@ def summarize_document(
     try:
 
         summary = "This is a placeholder summary. The summarization logic is not yet implemented."
-        cleaned_text = PredictionPipeline(config).predict(file)
+        list_chunk_path = prediction_pipeline.predict(file)
 
         return {
         "filename": file.filename,
-        "cleaned_text": cleaned_text,
+        "cleaned_text": list_chunk_path,
         "summary": summary
     }
 
@@ -51,8 +53,16 @@ def summarize_document(
         )
 
     except Exception as e:
+        traceback.print_exc()
 
         raise HTTPException(
             status_code=500,
             detail=str(e)
-        )
+    )
+
+    # except Exception as e:
+
+    #     raise HTTPException(
+    #         status_code=500,
+    #         detail=str(e)
+    #     )
