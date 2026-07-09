@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document Summarization System</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Document Summarization System</h1>
+
+    <p class="subtitle">
+        Upload PDF, DOCX or TXT files and generate summaries using PEGASUS.
+    </p>
+
+    <div class="upload-card">
+
+        <input
+                type="file"
+                id="fileInput"
+                accept=".pdf,.docx,.txt"
+        >
+
+        <button id="summarizeBtn">
+            Summarize
+        </button>
+
+        <div id="loading" class="loading">
+
+            <div class="spinner"></div>
+
+            <p>Generating Summary...</p>
+
+        </div>
+
+    </div>
+
+    <div class="summary-card">
+
+        <h2>Summary</h2>
+
+        <textarea
+                id="summaryBox"
+                placeholder="Summary will appear here..."
+                readonly
+        ></textarea>
+
+        <button id="downloadBtn">
+
+            Download Summary
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="/static/js/script.js"></script>
+
+</body>
+
+</html>
