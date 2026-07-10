@@ -99,7 +99,7 @@ Document-Summarization-System/
 │       ├── constants/
 │       ├── entity/
 │       ├── pipeline/
-        ├── logging/
+│       ├── logging/
 │       └── utils/
 │
 ├── templates/
